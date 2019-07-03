@@ -18,11 +18,13 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public MyLinkedList() {
 		// TODO: Implement this method
 		
-		head = new LLNode<>(null);
-		tail = new LLNode<>(null);
+		this.size = 0;
 		
-		head.next = tail;
-		tail.prev = head;
+		this.head = new LLNode<E>(null);
+		this.tail = new LLNode<E>(null);
+		
+		this.head.next = tail;
+		this.tail.prev = head;
 	}
 
 	/**
@@ -32,7 +34,17 @@ public class MyLinkedList<E> extends AbstractList<E> {
 	public boolean add(E element ) 
 	{
 		// TODO: Implement this method
-		return false;
+		
+		if (element == null) {
+			throw new NullPointerException("Unable to insert a null element.");
+		}
+		
+		this.tail = new LLNode<E>(element, tail);
+		
+		size++;
+		return true;
+		
+
 	}
 
 	/** Get the element at position index 
@@ -100,6 +112,15 @@ class LLNode<E>
 	{
 		this.data = e;
 		this.prev = null;
+		this.next = null;
+	}
+	
+	public LLNode(E e, LLNode<E> tail) 
+	{	
+		tail.data = e;
+		this.data = null;
+		this.prev = tail;
+		tail.next = this;
 		this.next = null;
 	}
 
