@@ -22,6 +22,10 @@ public class MyLinkedListTester {
 	MyLinkedList<Integer> emptyList;
 	MyLinkedList<Integer> longerList;
 	MyLinkedList<Integer> list1;
+	MyLinkedList<String> addEndList;
+	MyLinkedList<String> sizeList;
+	MyLinkedList<String> addElementAtList;
+	MyLinkedList<String> setElementAtList;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -115,6 +119,19 @@ public class MyLinkedListTester {
 		assertEquals("Remove: check size is correct ", 2, list1.size());
 		
 		// TODO: Add more tests here
+		
+		try {
+			list1.remove(-1);
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+		try {
+			list1.remove(4);
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
 	}
 	
 	/** Test adding an element into the end of the list, specifically
@@ -125,6 +142,20 @@ public class MyLinkedListTester {
 	{
         // TODO: implement this test
 		
+		String testAdd[] = { "a", "b", "c", "d", "e", "f", "g", "h", "i" };
+		for (String s : testAdd) {
+			assertTrue("Adding value: " + s, addEndList.add(s));
+			assertEquals("Checking to see if value exists at the end of the list", s, addEndList.get(addEndList.size - 1));
+		}
+		
+
+		try {
+			addEndList.add(null);
+			fail("Check NPE");
+		}
+		catch (NullPointerException e) {
+		}
+		
 	}
 
 	
@@ -133,6 +164,11 @@ public class MyLinkedListTester {
 	public void testSize()
 	{
 		// TODO: implement this test
+		
+		for (int i = 0; i < 1000; i++) {
+			sizeList.add(String.valueOf(i));
+		}
+		assertEquals("Checking the size of the list is equal to 1000.", 1000, sizeList.size);
 	}
 
 	
@@ -146,6 +182,38 @@ public class MyLinkedListTester {
 	{
         // TODO: implement this test
 		
+		 addElementAtList.add("A");
+		 assertEquals("Is element 0 = A?", "A", addElementAtList.get(0));
+		 addElementAtList.add(0, "K");
+		 assertEquals("Is element 0 = K?", "K", addElementAtList.get(0));
+		 addElementAtList.add(2, "X");
+		 assertEquals("Is element 2 = X?", "X", addElementAtList.get(2));
+		 addElementAtList.add(3, "Y");
+		 assertEquals("Is element 3 = Y?", "Y", addElementAtList.get(3));
+		 addElementAtList.add(4, "Z");
+		 assertEquals("Is element 4 = Z?", "Z", addElementAtList.get(4));
+		 
+
+		try {
+			addElementAtList.add(-1, "sleepy");
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+		try {
+			addElementAtList.add(100000, "man");
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+		
+		try {
+			addElementAtList.set(1, null);
+			fail("Check for NPE");
+		}
+		catch (NullPointerException e) {
+		}
+		
 	}
 	
 	/** Test setting an element in the list */
@@ -153,6 +221,38 @@ public class MyLinkedListTester {
 	public void testSet()
 	{
 	    // TODO: implement this test
+		
+		for (int i = 0; i < 1000; i++) {
+			setElementAtList.add(String.valueOf(i));
+			assertEquals("Is value equal to " + i, String.valueOf(i), setElementAtList.get(i));
+		}
+		assertEquals("Checking the size of the list is equal to 1000.", 1000, setElementAtList.size);
+		
+		for (int i = 0; i < 1000; i++) {
+			setElementAtList.set(i, "derkey");
+		}
+	    
+		assertEquals("Is index 88 = derkey", "derkey", setElementAtList.get(88));
+		
+		try {
+			setElementAtList.set(-1, "value");
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+		try {
+			setElementAtList.set(1002, "value");
+			fail("Check out of bounds");
+		}
+		catch (IndexOutOfBoundsException e) {
+		}
+		
+		try {
+			setElementAtList.set(1, null);
+			fail("Check for NPE");
+		}
+		catch (NullPointerException e) {
+		}
 	    
 	}
 	
